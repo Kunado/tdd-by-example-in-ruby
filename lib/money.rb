@@ -8,5 +8,9 @@ class Money
     def times(multiplier)
       Doller.new(@amount * multiplier)
     end
+
+    def equals(doller)
+      amount == doller.amount
+    end
   end
 end
