@@ -61,3 +61,14 @@ describe Money do
     end
   end
 end
+
+describe Bank do
+  describe '#add_rate' do
+    context 'when rate between doller and franc is 2:1' do
+      bank = Bank.new()
+      bank.add_rate('CHF', 'USD', 2)
+      result = bank.reduce(Money.franc(2), 'USD')
+      it { expect(result).to eq Money.doller(1) }
+    end
+  end
+end

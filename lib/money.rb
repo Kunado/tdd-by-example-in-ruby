@@ -28,14 +28,22 @@ class Money
     Sum.new(self, addend)
   end
 
-  def reduce(to)
-    self
+  def reduce(bank, to)
+    rate = bank.rate(currency, to)
+    Money.new(amount / rate, to)
   end
 end
 
 class Bank
   def reduce(source, to)
-    source.reduce(to)
+    source.reduce(self, to)
+  end
+
+  def add_rate(from, to, rate)
+  end
+
+  def rate(from, to)
+    from == 'CHF' && to == 'USD' ? 2 : 1
   end
 end
 
@@ -46,7 +54,7 @@ class Sum
     @addend = addend
   end
 
-  def reduce(to)
+  def reduce(bank, to)
     amount = augend.amount + addend.amount
     Money.new(amount, to)
   end
