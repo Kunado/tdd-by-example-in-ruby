@@ -29,6 +29,16 @@ describe Money do
     end
   end
 
+  describe '#plus' do
+    context 'when added 5 doller' do
+      five_doller = Money.doller(5)
+      sum = five_doller.plus(five_doller)
+      bank = Bank.new()
+      reduced = bank.reduce(sum, 'USD')
+      it { expect(Money.doller(10)).to eq reduced }
+    end
+  end
+
   context 'with 5 franc object' do
     let(:five_franc) { Money.franc(5) }
     describe '#currency' do
