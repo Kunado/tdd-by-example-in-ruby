@@ -4,6 +4,16 @@ class Money < Struct.new(:amount)
     freeze
   end
 
+  class << self
+    def doller(amount)
+      Money::Doller.new(amount)
+    end
+
+    def franc(amount)
+      Money::Franc.new(amount)
+    end
+  end
+
   class Doller < Money
     def times(multiplier)
       Money::Doller.new(amount * multiplier)
