@@ -19,6 +19,9 @@ describe Money::Doller do
       context 'with another object whose amount is 6' do
         it { expect(five_doller).to_not eq Money::Doller.new(6) }
       end
+      context 'with another franc object whose amount is 5' do
+        it { expect(five_doller).to_not eq Money::Franc.new(5) }
+      end
     end
   end
 end
