@@ -30,12 +30,27 @@ describe Money do
   end
 
   describe '#plus' do
-    context 'when added 5 doller' do
+    context 'when 5 doller is added to 5 doller' do
       five_doller = Money.doller(5)
       sum = five_doller.plus(five_doller)
       bank = Bank.new()
       reduced = bank.reduce(sum, 'USD')
       it { expect(Money.doller(10)).to eq reduced }
+      it { expect(five_doller).to eq sum.augend }
+      it { expect(five_doller).to eq sum.addend }
+    end
+
+    context 'when 4 doller is added to 3 doller' do
+      sum = Sum.new(Money.doller(3), Money.doller(4))
+      bank = Bank.new()
+      result = bank.reduce(sum, 'USD')
+      it { expect(result).to eq Money.doller(7) }
+    end
+
+    context 'when 1 doller reduced' do
+      bank = Bank.new()
+      result = bank.reduce(Money.doller(1), 'USD')
+      it { expect(result).to eq Money.doller(1) }
     end
   end
 

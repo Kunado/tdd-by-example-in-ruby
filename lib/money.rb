@@ -25,15 +25,29 @@ class Money
   end
 
   def plus(addend)
-    Money.new(amount + addend.amount, currency)
+    Sum.new(self, addend)
   end
-end
 
-class Expression
+  def reduce(to)
+    self
+  end
 end
 
 class Bank
   def reduce(source, to)
-    Money.doller(10)
+    source.reduce(to)
+  end
+end
+
+class Sum
+  attr_reader :augend, :addend
+  def initialize(augend, addend)
+    @augend = augend
+    @addend = addend
+  end
+
+  def reduce(to)
+    amount = augend.amount + addend.amount
+    Money.new(amount, to)
   end
 end
