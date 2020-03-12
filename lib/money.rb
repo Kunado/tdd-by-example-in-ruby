@@ -1,16 +1,12 @@
 class Money
-  class Doller
-    attr_reader :amount
-    def initialize(amount)
-      @amount = amount
+  class Doller < Struct.new(:amount)
+    def initalize(*args)
+      super
+      freeze
     end
 
     def times(multiplier)
-      Doller.new(@amount * multiplier)
-    end
-
-    def equals(doller)
-      amount == doller.amount
+      Money::Doller.new(amount * multiplier)
     end
   end
 end
